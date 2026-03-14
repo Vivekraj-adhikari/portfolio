@@ -10,9 +10,3 @@ class DiabetesTrainingPipeline:
             ('scaler', StandardScaler()),
             ('classifier', LogisticRegression())
         ])
-
-    def train_model(self):
-        df = self.data_pipeline.data_ingestion()
-        X, y = self.data_pipeline.data_preprocessing(df)
-        X_train, X_test, y_train, y_test = self.data_pipeline.split_data(X, y)
-        return X_train, X_test, y_train, y_test
