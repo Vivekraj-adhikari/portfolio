@@ -5,8 +5,5 @@ class DiabetesPredictionPipeline:
         self.diabetes_model = joblib.load('artifacts/diabetes_model.pkl')
 
     def predict_diabetes(self, input_features):
-        prediction = []
-        for features in input_features:
-            pred = self.diabetes_model.predict([features])
-            prediction.append(pred)
+        prediction = self.diabetes_model.predict(input_features)
         return prediction
