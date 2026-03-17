@@ -1,20 +1,14 @@
-from training_pipeline.diabetes_training import DiabetesTrainingPipeline
-from prediction_pipeline.diabetes_prediction import DiabetesPredictionPipeline
+from fastapi import FastAPI
+from routes.diabetes_prediction_route import router as diabetes_router
 
-training_pipeline = DiabetesTrainingPipeline()
-prediction_pipeline = DiabetesPredictionPipeline()
+app = FastAPI(
+    title="Prediction API",
+    description="API ML models",
+    version="1.0"
+)
 
-training_pipeline.train_model()
+app.include_router(diabetes_router)
 
-input_features = [
-    [101,76,48,180,32.9,0.171],
-    [122,70,27,0,36.8,0.34],
-    [121,72,23,112,26.2,0.245],
-    [126,60,0,0,30.1,0.349],
-    [123,72,0,0,36.3,0.258],
-    [190,92,0,0,35.5,0.278]
-]
-
-pred = prediction_pipeline.predict_diabetes(input_features)
-
-print(pred)
+@app.get('/')
+def home():
+    return {"message": "Welcome to the Prediction API!"}
