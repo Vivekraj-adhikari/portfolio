@@ -8,23 +8,23 @@ router = APIRouter(prefix="/predict_diabetes", tags=['Prediction'])
 
 
 class DiabetesFeatures(BaseModel):
-    Glucose: float
-    BloodPressure: float
-    SkinThickness: float
-    Insulin: float
-    BMI: float
-    DiabetesPedigreeFunction: float
+    glucose: float
+    blood_pressure: float
+    skin_thickness: float
+    insulin: float
+    bmi: float
+    diabetes_pedigree_function: float
 
 @router.post('/')
 def predict_diabetes(input_features: DiabetesFeatures):
     features_list = [
-        input_features.Glucose,
-        input_features.BloodPressure,
-        input_features.SkinThickness,
-        input_features.Insulin,
-        input_features.BMI,
-        input_features.DiabetesPedigreeFunction
+        input_features.glucose,
+        input_features.blood_pressure,
+        input_features.skin_thickness,
+        input_features.insulin,
+        input_features.bmi,
+        input_features.diabetes_pedigree_function
     ]
     prediction_pipeline = DiabetesPredictionPipeline()
     prediction = prediction_pipeline.predict_diabetes(features_list)
-    return prediction
+    return {"prediction": "Diabetic" if prediction == 1 else "Non-Diabetic"}
