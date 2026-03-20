@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import projects, { TAG_COLORS } from '../data/projects'
-import DemoField  from '../components/DemoField'
+import DemoField from '../components/DemoField'
 import DemoOutput from '../components/DemoOutput'
 
 // ─── tiny spinner ──────────────────────────────────────────────────────────────
@@ -23,10 +23,10 @@ function Spinner({ color }) {
 // ─── status strip ─────────────────────────────────────────────────────────────
 function StatusBar({ status, message, color }) {
   const cfg = {
-    idle:    { bg: 'rgba(255,255,255,0.03)', text: 'rgba(255,255,255,0.25)', icon: '○' },
-    loading: { bg: `${color}0d`,             text: color,                    icon: null },
-    success: { bg: 'rgba(0,255,136,0.06)',   text: '#00ff88',                icon: '✓' },
-    error:   { bg: 'rgba(255,107,107,0.08)', text: '#ff6b6b',                icon: '✕' },
+    idle: { bg: 'rgba(255,255,255,0.03)', text: 'rgba(255,255,255,0.25)', icon: '○' },
+    loading: { bg: `${color}0d`, text: color, icon: null },
+    success: { bg: 'rgba(0,255,136,0.06)', text: '#00ff88', icon: '✓' },
+    error: { bg: 'rgba(255,107,107,0.08)', text: '#ff6b6b', icon: '✕' },
   }
   const c = cfg[status] || cfg.idle
 
@@ -54,12 +54,12 @@ function StatusBar({ status, message, color }) {
 // ─── main page ────────────────────────────────────────────────────────────────
 export default function ProjectPage() {
   const { slug } = useParams()
-  const project  = projects.find(p => p.slug === slug)
+  const project = projects.find(p => p.slug === slug)
 
-  const [values,  setValues]  = useState({})
-  const [status,  setStatus]  = useState('idle')   // idle | loading | success | error
+  const [values, setValues] = useState({})
+  const [status, setStatus] = useState('idle')   // idle | loading | success | error
   const [message, setMessage] = useState('Fill in the fields and click Run Model')
-  const [result,  setResult]  = useState(null)
+  const [result, setResult] = useState(null)
 
   if (!project) {
     return (
@@ -80,7 +80,7 @@ export default function ProjectPage() {
     if (hasFile) {
       const fd = new FormData()
       project.demo.fields.forEach(f => {
-        const v = values[f.id]
+        const v = values[f.label]
         if (v !== undefined && v !== null && v !== '') fd.append(f.id, v)
       })
       return { body: fd, headers: {} }
