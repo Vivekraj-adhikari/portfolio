@@ -1,4 +1,5 @@
 import joblib
+import numpy as np
 import pandas as pd
 
 class DiabetesPredictionPipeline:
@@ -14,6 +15,7 @@ class DiabetesPredictionPipeline:
             'BMI',
             'DiabetesPedigreeFunction',
         ]
-        data = pd.DataFrame(input_features, columns=columns)
+        input_array = np.array(input_features).reshape(1, -1)
+        data = pd.DataFrame(input_array, columns=columns)
         prediction = self.diabetes_model.predict(data)
-        return prediction
+        return int(prediction[0])
