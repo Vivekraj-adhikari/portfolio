@@ -24,7 +24,7 @@ const projects = [
     metrics: { Accuracy: '78.5%', Precision: '76.2%', Recall: '74.1%', Dataset: '768 patients', Model: 'Logistic Regression' },
     github: 'https://github.com/Vivekraj-adhikari/scratch-vs-sklearn/tree/main/logistic-regression',
     tag: 'Classification',
-    apiEndpoint: 'http://localhost:8000/predict_diabetes/',
+    apiEndpoint: 'https://portfolio-175t.onrender.com/predict_diabetes/',
     demo: {
       outputType: 'json',
       fields: [
