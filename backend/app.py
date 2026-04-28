@@ -10,6 +10,7 @@ app = FastAPI(
 origins = [
     "https://portfolio-175t.onrender.com",   # React default
     "http://127.0.0.1:5173",
+    "https://portfolio-smoky-xi-48.vercel.app"
 ]
 app.add_middleware(
     CORSMiddleware,
